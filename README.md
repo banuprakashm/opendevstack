@@ -18,6 +18,10 @@ OpenDevStack provides production-ready starter templates for modern tech stacks.
 - Logging
 - Docker Ready
 
+## Documentation
+- Architecture Guidelines
+- Security Checklist
+
 ## Contributing
 Fork → Add stack → Create PR
 
