@@ -1,12 +1,20 @@
 const { generateToken } = require("../utils/jwt");
 
+// Register Controller
 const register = async (req, res) => {
     const { email, password } = req.body;
 
-    // For now, just simulate user creation
-    const user = { id: 1, email };
+    // Simulated user creation (no DB yet)
+    const user = {
+        id: 1,
+        email,
+        role: "user", // default role
+    };
 
-    const token = generateToken({ id: user.id });
+    const token = generateToken({
+        id: user.id,
+        role: user.role,
+    });
 
     res.status(201).json({
         message: "User registered successfully",
@@ -14,13 +22,21 @@ const register = async (req, res) => {
     });
 };
 
+// Login Controller
 const login = async (req, res) => {
     const { email } = req.body;
 
-    // Simulated user validation
-    const user = { id: 1, email };
+    // Simulated user validation (no DB yet)
+    const user = {
+        id: 1,
+        email,
+        role: "user", // default role
+    };
 
-    const token = generateToken({ id: user.id });
+    const token = generateToken({
+        id: user.id,
+        role: user.role,
+    });
 
     res.status(200).json({
         message: "Login successful",
