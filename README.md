@@ -4,11 +4,11 @@ OpenDevStack provides production-ready starter templates for modern tech stacks.
 
 ## Available Stacks
 - MERN SaaS
-- Next.js SaaS
-- Spring Boot REST API
-- Django REST API
-- FastAPI
-- Node Microservice
+- Next.js SaaS (Coming soon...)
+- Spring Boot REST API (Coming soon...)
+- Django REST API (Coming soon...)
+- FastAPI (Coming soon...)
+- Node Microservice (Coming soon...)
 
 ## What You Get
 - Authentication
