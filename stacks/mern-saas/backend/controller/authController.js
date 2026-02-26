@@ -1,47 +1,61 @@
+const User = require("../model/User");
 const { generateToken } = require("../utils/jwt");
 
-// Register Controller
-const register = async (req, res) => {
-    const { email, password } = req.body;
+// Register
+const register = async (req, res, next) => {
+    try {
+        const { email, password } = req.body;
 
-    // Simulated user creation (no DB yet)
-    const user = {
-        id: 1,
-        email,
-        role: "user", // default role
-    };
+        const existingUser = await User.findOne({ email });
+        if (existingUser) {
+            return res.status(400).json({
+                message: "User already exists",
+            });
+        }
 
-    const token = generateToken({
-        id: user.id,
-        role: user.role,
-    });
+        const user = await User.create({
+            email,
+            password,
+        });
 
-    res.status(201).json({
-        message: "User registered successfully",
-        token,
-    });
+        const token = generateToken({
+            id: user._id,
+            role: user.role,
+        });
+
+        res.status(201).json({
+            message: "User registered successfully",
+            token,
+        });
+    } catch (error) {
+        next(error);
+    }
 };
 
-// Login Controller
-const login = async (req, res) => {
-    const { email } = req.body;
+// Login
+const login = async (req, res, next) => {
+    try {
+        const { email, password } = req.body;
 
-    // Simulated user validation (no DB yet)
-    const user = {
-        id: 1,
-        email,
-        role: "user", // default role
-    };
+        const user = await User.findOne({ email });
+        if (!user) {
+            return res.status(400).json({
+                message: "Invalid credentials",
+            });
+        }
 
-    const token = generateToken({
-        id: user.id,
-        role: user.role,
-    });
+        const token = generateToken({
+            id: user._id,
+            role: user.role,
+        });
 
-    res.status(200).json({
-        message: "Login successful",
-        token,
-    });
+        res.status(200).json({
+            message: "Login successful",
+            token,
+        });
+    } catch (error) {
+        next(error);
+    }
 };
 
 module.exports = { register, login };
