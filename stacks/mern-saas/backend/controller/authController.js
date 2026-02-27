@@ -33,12 +33,21 @@ const register = async (req, res, next) => {
 };
 
 // Login
+// Login
 const login = async (req, res, next) => {
     try {
         const { email, password } = req.body;
 
         const user = await User.findOne({ email });
         if (!user) {
+            return res.status(400).json({
+                message: "Invalid credentials",
+            });
+        }
+
+        const isMatch = await user.matchPassword(password);
+
+        if (!isMatch) {
             return res.status(400).json({
                 message: "Invalid credentials",
             });
