@@ -1,5 +1,6 @@
 {
   "dependencies": {
-    "bcryptjs": "^3.0.3"
+    "bcryptjs": "^3.0.3",
+    "express-validator": "^7.3.1"
   }
 }
